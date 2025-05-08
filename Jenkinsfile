@@ -11,7 +11,8 @@ pipeline {
                 // Clone Repository
                 script {
                     echo 'Cloning GitHub Repository...'
-                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'mlops', url: 'https://github.com/mehardeep88/mlops.git']])
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '55aa2c97-2046-40e5-ade4-2570a0e5080f', url: 'https://github.com/mehardeep88/mlops.git']])
+                    //checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'mlops', url: 'https://github.com/mehardeep88/mlops.git']])
                 }
             }
         }
