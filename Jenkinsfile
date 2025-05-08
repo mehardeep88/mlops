@@ -21,23 +21,23 @@ pipeline {
                 // Lint code
                 script {
                     echo 'Linting Python Code...'
-                    bat "python -m pip install -r requirements.txt"
-                    /* bat "python -m pip install --break-system-packages -r requirements.txt"
+                    //bat "python -m pip install -r requirements.txt"
+                    bat "python -m pip install --break-system-packages -r requirements.txt"
                     bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
                     bat "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
-                    bat "black app.py train.py" */
+                    bat "black app.py train.py"
                 }
             }
         }
-        /* stage('Test Code') {
+        stage('Test Code') {
             steps {
                 // Pytest code
                 script {
                     echo 'Testing Python Code...'
-                    bat "pytest tests/"
+                    //bat "pytest tests/"
                 }
             }
-        } */
+        }
         stage('Trivy FS Scan') {
             steps {
                 // Trivy Filesystem Scan
