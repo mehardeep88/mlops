@@ -21,6 +21,7 @@ pipeline {
                 // Lint code
                 script {
                     echo 'Linting Python Code...'
+                    bat "python --version"
                     /* bat "python -m pip install --break-system-packages -r requirements.txt"
                     bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
                     bat "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
