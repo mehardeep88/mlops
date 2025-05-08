@@ -44,6 +44,9 @@ USER appuser
 # Copy the source code into the container.
 COPY . .
 
+# train the model before running the application
+RUN python train.py
+
 # Expose the port that the application listens on.
 EXPOSE 8000
 

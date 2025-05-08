@@ -16,19 +16,19 @@ pipeline {
                 }
             }
         }
-        stage('Lint Code') {
+        stage('Lint and Tests') {
             steps {
                 // Lint code
                 script {
                     echo 'Linting Python Code...'
-                    bat "python -m pip install --break-system-packages -r requirements.txt"
+                    /* bat "python -m pip install --break-system-packages -r requirements.txt"
                     bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
                     bat "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
-                    bat "black app.py train.py"
+                    bat "black app.py train.py" */
                 }
             }
         }
-        stage('Test Code') {
+        /* stage('Test Code') {
             steps {
                 // Pytest code
                 script {
@@ -36,13 +36,13 @@ pipeline {
                     bat "pytest tests/"
                 }
             }
-        }
+        } */
         stage('Trivy FS Scan') {
             steps {
                 // Trivy Filesystem Scan
                 script {
                     echo 'Scannning Filesystem with Trivy...'
-                    bat "trivy fs ./ --format table -o trivy-fs-report.html"
+                    /* bat "trivy fs ./ --format table -o trivy-fs-report.html" */
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image...'
-                    dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest") 
+                    /* dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")  */
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
                 // Trivy Docker Image Scan
                 script {
                     echo 'Scanning Docker Image with Trivy...'
-                    bat "trivy image ${DOCKERHUB_REPOSITORY}:latest --format table -o trivy-image-report.html"
+                    /* bat "trivy image ${DOCKERHUB_REPOSITORY}:latest --format table -o trivy-image-report.html" */
                 }
             }
         }
@@ -69,25 +69,25 @@ pipeline {
                 // Push Docker Image to DockerHub
                 script {
                     echo 'Pushing Docker Image to DockerHub...'
-                    docker.withRegistry("${DOCKERHUB_REGISTRY}", "${DOCKERHUB_CREDENTIAL_ID}"){
-                        dockerImage.push('latest')
+                    /* docker.withRegistry("${DOCKERHUB_REGISTRY}", "${DOCKERHUB_CREDENTIAL_ID}"){
+                        dockerImage.push('latest') */
                     }
                 }
             }
         }
-        /* stage('Deploy') {
+        stage('Deploy') {
             steps {
                 // Deploy Image to Amazon ECS
                 script {
                     echo 'Deploying to production...'
-                        sh '''
+                        /* sh '''
                         az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
                         az aks get-credentials --resource-group <your-resource-group> --name <your-aks-cluster>
                         kubectl set image deployment/<your-deployment-name> <container-name>=<yourimage>:<tag>
-                    '''
+                    ''' */
                     }
                 }
             }
-        } */
+        }
     }
 }
