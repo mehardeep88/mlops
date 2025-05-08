@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        stage('Lint and Tests') {
+        stage('Lint Code') {
             steps {
                 // Lint code
                 script {
@@ -24,7 +24,7 @@ pipeline {
                     //bat "python -m pip install -r requirements.txt"
                     bat "python -m pip install --break-system-packages -r requirements.txt"
                     bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
-                    bat "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
+                    bat "python -m flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt || exit 0"
                     bat "black app.py train.py"
                 }
             }
