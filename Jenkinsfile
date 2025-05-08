@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    environment {
-        /* DOCKERHUB_CREDENTIAL_ID = '70e6a517-068a-4d14-852d-49058d5d888d'
+    /* environment {
+        DOCKERHUB_CREDENTIAL_ID = '70e6a517-068a-4d14-852d-49058d5d888d'
         DOCKERHUB_REGISTRY = 'https://index.docker.io/v1/'
-        DOCKERHUB_REPOSITORY = 'mehmeh8/py-project' */
-    }
+        DOCKERHUB_REPOSITORY = 'mehmeh8/py-project' 
+    } */
     stages {
         stage('Clone Repository') {
             steps {
