@@ -74,7 +74,7 @@ pipeline {
                     }
                 }
             }
-        }
+        
         stage('Deploy') {
             steps {
                 // Deploy Image to Amazon ECS
@@ -89,5 +89,4 @@ pipeline {
                 }
             }
         }
-    }
 }
