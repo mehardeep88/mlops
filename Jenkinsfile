@@ -48,14 +48,14 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            environment {
+            /* environment {
                  DOCKER_BUILDKIT = '1'
-            }
+            } */
             steps {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image...'
-                    dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest") 
+                    bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ."                
                 }
             }
         }
