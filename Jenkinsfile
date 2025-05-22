@@ -4,6 +4,7 @@ pipeline {
         DOCKERHUB_CREDENTIAL_ID = 'DOCKERHUB_CREDENTIAL_ID'
         DOCKERHUB_REGISTRY = 'https://index.docker.io/v1/'
         DOCKERHUB_REPOSITORY = 'mehmeh8/py-project' 
+        DOCKER_CONTEXT=default
     }
     stages {
         stage('Clone Repository') {
