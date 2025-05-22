@@ -48,6 +48,9 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            environment {
+                 DOCKER_BUILDKIT = '1'
+            }
             steps {
                 // Build Docker Image
                 script {
