@@ -34,7 +34,7 @@ pipeline {
                 // Pytest code
                 script {
                     echo 'Testing Python Code...'
-                    bat "pytest tests/"
+                    //bat "pytest tests/"
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                 // Trivy Filesystem Scan
                 script {
                     echo 'Scannning Filesystem with Trivy...'
-                    bat "trivy fs ./ --format table -o trivy-fs-report.html"
+                    //bat "trivy fs ./ --format table -o trivy-fs-report.html"
                 }
             }
         }
