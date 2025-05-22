@@ -77,7 +77,7 @@ pipeline {
                     echo 'Pushing Docker Image to DockerHub...'
                     withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIAL_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                 bat """
-                    wsl docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+                    echo %DOCKER_PASS% | wsl docker login -u %DOCKER_USER% --password-stdin
                     wsl docker push ${DOCKERHUB_REPOSITORY}:latest
                 """
             }
