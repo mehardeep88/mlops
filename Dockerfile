@@ -45,7 +45,7 @@ USER appuser
 COPY . .
 
 # train the model before running the application
-RUN python train.py
+RUN mkdir -p model && chmod 777 model && python train.py
 
 # Expose the port that the application listens on.
 EXPOSE 8000
