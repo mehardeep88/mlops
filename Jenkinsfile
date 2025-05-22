@@ -43,7 +43,7 @@ pipeline {
                 // Trivy Filesystem Scan
                 script {
                     echo 'Scannning Filesystem with Trivy...'
-                    //bat "trivy fs ./ --format table -o trivy-fs-report.html"
+                    bat 'docker run --rm -v %cd%:/project aquasec/trivy fs /project --format table -o /project/trivy-fs-report.html'
                 }
             }
         }
