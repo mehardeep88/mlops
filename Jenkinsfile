@@ -52,7 +52,7 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image...'
-                    /* dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")  */
+                    dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest") 
                 }
             }
         }
