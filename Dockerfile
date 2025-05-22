@@ -39,13 +39,13 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install -r requirements.txt
 
 # Switch to the non-privileged user to run the application.
-USER appuser
+USER root
 
 # Copy the source code into the container.
 COPY . .
 
 # train the model before running the application
-RUN mkdir -p model && chmod 777 model && python train.py
+RUN python train.py
 
 # Expose the port that the application listens on.
 EXPOSE 8000
