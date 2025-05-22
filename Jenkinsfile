@@ -56,8 +56,8 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image...'
-                    /* bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ."  */ 
-                    def dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")              
+                    bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ." 
+                    /* def dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")    */           
                 }
             }
         }
@@ -75,10 +75,13 @@ pipeline {
                 // Push Docker Image to DockerHub
                 script {
                     echo 'Pushing Docker Image to DockerHub...'
-                    docker.withRegistry("${DOCKERHUB_REGISTRY}", "${DOCKERHUB_CREDENTIAL_ID}"){
-                        dockerImage.push('latest')
-                    }
-                }    
+                    withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIAL_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                bat """
+                    wsl docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+                    wsl docker push ${DOCKERHUB_REPOSITORY}:latest
+                """
+            }
+        }  
             }
         }
         
