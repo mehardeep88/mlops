@@ -85,19 +85,6 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
-            steps {
-                // Deploy Image to Amazon ECS
-                script {
-                    echo 'Deploying to production...'
-                        /* sh '''
-                        az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-                        az aks get-credentials --resource-group <your-resource-group> --name <your-aks-cluster>
-                        kubectl set image deployment/<your-deployment-name> <container-name>=<yourimage>:<tag>
-                    ''' */
-                    }
-                }
-            }
         }
     
 }
