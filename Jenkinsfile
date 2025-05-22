@@ -38,6 +38,13 @@ pipeline {
                 }
             }
         }
+        stage('Check Docker') {
+            steps {
+                script {
+                    bat 'docker --version'
+                }
+            }
+        }
         stage('Trivy FS Scan') {
             steps {
                 // Trivy Filesystem Scan
