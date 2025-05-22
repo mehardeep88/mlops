@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIAL_ID = 'DOCKERHUB_CREDENTIAL_ID'
-        DOCKERHUB_REGISTRY = 'https://index.docker.io/v1/'
+        DOCKERHUB_REGISTRY = 'https://registry.hub.docker.com'
         DOCKERHUB_REPOSITORY = 'mehmeh8/py-project' 
         /* DOCKER_CONTEXT=default */
     }
