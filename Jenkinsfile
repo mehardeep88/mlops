@@ -38,19 +38,12 @@ pipeline {
                 }
             }
         }
-        stage('Check Docker') {
-            steps {
-                script {
-                    bat 'docker --version'
-                }
-            }
-        }
         stage('Trivy FS Scan') {
             steps {
-                // Trivy Filesystem Scan
                 script {
-                    echo 'Scannning Filesystem with Trivy...'
-                    bat 'docker run --rm -v %cd%:/project aquasec/trivy fs /project --format table -o /project/trivy-fs-report.html'
+                    echo 'Starting Trivy file system scan...'
+                    bat 'trivy -v' // confirm Trivy is available
+                    bat 'trivy fs --exit-code 0 --skip-dirs .venv --skip-files pylint-report.txt,flake8-report.txt,black-report.txt .'
                 }
             }
         }
