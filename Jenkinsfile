@@ -75,13 +75,12 @@ pipeline {
                 // Push Docker Image to DockerHub
                 script {
                     echo 'Pushing Docker Image to DockerHub...'
-                    withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIAL_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                bat """
-                    echo %DOCKER_PASS% | wsl docker login -u %DOCKER_USER% --password-stdin
-                    wsl docker push ${DOCKERHUB_REPOSITORY}:latest
-                """
+                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIAL_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    def loginCmd = "echo %DOCKER_PASS% | wsl docker login -u %DOCKER_USER% --password-stdin"
+                    def pushCmd = "wsl docker push ${DOCKERHUB_REPOSITORY}:latest"
+                    bat "${loginCmd} && ${pushCmd}"
             }
-        }  
+        }
             }
         }
         
