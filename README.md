@@ -52,6 +52,6 @@ A simple Flask-based web application that predicts the species of an Iris flower
 
 - [@mehardeep88](https://www.github.com/mehardeep88)
 - [@kiran7778](https://www.github.com/kiran7778)
-- Inderjeet
+- [@InderjeetKaur26](https://www.github.com/InderjeetKaur26)
 
 
