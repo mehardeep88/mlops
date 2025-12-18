@@ -63,8 +63,9 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image...'
-                    bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ." 
+                    //bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ." 
                     /* def dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")    */           
+                    docker.build("mlops") 
                 }
             }
         }
