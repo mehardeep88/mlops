@@ -89,7 +89,7 @@ pipeline {
                 //echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                 //docker push mehmeh8/py-project:latest
                 //'''
-                    docker.withRegistry('${DOCKERHUB_REGISTRY}','${DOCKERHUB_CRED_ID}'){
+                    docker.withRegistry("${DOCKERHUB_REGISTRY}","${DOCKERHUB_CRED_ID}"){
                         dockerImage.push('latest')
                     }
                 }
