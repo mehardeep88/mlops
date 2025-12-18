@@ -100,9 +100,9 @@ pipeline {
                 //deploy to aws
                 script {
                     echo 'Deploying to production...'
-                     sh "aws ecs update-service --cluster ml-ecs --service mlops-ecs-task-def-service --force-new-deployment
+                     sh "aws ecs update-service --cluster ml-ecs --service mlops-ecs-task-def-service --force-new-deployment"
                 }
             }
         }
     }
-} 
+}
