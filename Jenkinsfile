@@ -100,7 +100,13 @@ pipeline {
                 //deploy to aws
                 script {
                     echo 'Deploying to production...'
+                    withCredentials([usernamePassword(
+                        credentialsId: "mlops-aws",
+                        usernameVariable: "AWS_ACCESS_KEY_ID",
+                        usernamePassword: "AWS_SECRET_ACCESS_KEY"
+                    )]){
                      sh "aws ecs update-service --cluster ml-ecs --service mlops-ecs-task-def-service --region us-east-1 --force-new-deployment"
+                    }
                 }
             }
         }
