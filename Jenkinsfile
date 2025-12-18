@@ -104,7 +104,7 @@ pipeline {
                         $class: 'AmazonWebServicesCredentialsBinding',
                         credentialsId: 'mlops-aws'
                         ]]) {
-                     sh "aws sts get-caller-identity aws ecs update-service --cluster ml-ecs --service mlops-ecs-task-def-service --region us-east-1 --force-new-deployment"
+                     sh "aws sts get-caller-identity && aws ecs update-service --cluster ml-ecs --service mlops-ecs-task-def-service --region us-east-1 --force-new-deployment"
                     }
                 }
             }
