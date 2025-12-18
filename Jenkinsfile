@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIAL_ID = 'DOCKERHUB_CREDENTIAL_ID'
+        DOCKERHUB_CRED_ID = 'mlops-docker-token'
         DOCKERHUB_REGISTRY = 'https://registry.hub.docker.com'
         DOCKERHUB_REPOSITORY = 'mehmeh8/py-project' 
         /* DOCKER_CONTEXT=default */
@@ -65,7 +65,8 @@ pipeline {
                     echo 'Building Docker Image...'
                     //bat "wsl docker buildx build --builder default -t ${DOCKERHUB_REPOSITORY}:latest ." 
                     /* def dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")    */           
-                    docker.build("mlops") 
+                    //dockerImage = docker.build("mlops") 
+                    dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest") 
                 }
             }
         }
@@ -74,7 +75,7 @@ pipeline {
                 // Trivy Docker Image Scan
                 script {
                     echo 'Scanning Docker Image with Trivy...'
-                    sh "trivy image mlops:latest --format table -o trivy-image-report.html"
+                    sh "trivy image ${DOCKERHUB_REPOSITORY}:latest --format table -o trivy-image-report.html"
                 }
             }
         }
@@ -82,12 +83,15 @@ pipeline {
             steps {
                 // Push Docker Image to DockerHub
                 script {
-            echo 'Pushing Docker Image to DockerHub...'
-            withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIAL_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                sh '''
-                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                docker push mehmeh8/py-project:latest
-                '''
+                    echo 'Pushing Docker Image to DockerHub...'
+                //withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIAL_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                //sh '''
+                //echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                //docker push mehmeh8/py-project:latest
+                //'''
+                    docker.withRegistry('${DOCKERHUB_REGISTRY}','${DOCKERHUB_CRED_ID}'){
+                        dockerImage.push('latest')
+                    }
             }
         }
             }
