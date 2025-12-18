@@ -12,7 +12,8 @@ pipeline {
                 // Clone Repository
                 script {
                     echo 'Cloning GitHub Repository...'
-                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '55aa2c97-2046-40e5-ade4-2570a0e5080f', url: 'https://github.com/mehardeep88/mlops.git']])
+                    //checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '55aa2c97-2046-40e5-ade4-2570a0e5080f', url: 'https://github.com/mehardeep88/mlops.git']])
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'mlops-git-token', url: 'https://github.com/mehardeep88/mlops.git']])
                     //checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'mlops', url: 'https://github.com/mehardeep88/mlops.git']])
                 }
             }
@@ -22,11 +23,12 @@ pipeline {
                 // Lint code
                 script {
                     echo 'Linting Python Code...'
+                    sh "python --version"
                     //bat "python -m pip install -r requirements.txt"
-                    bat "python -m pip install --break-system-packages -r requirements.txt"
-                    bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
-                    bat "python -m flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt || exit 0"
-                    bat "black app.py train.py"
+                    //bat "python -m pip install --break-system-packages -r requirements.txt"
+                    //bat "pylint app.py train.py --output=pylint-report.txt --exit-zero"
+                    //bat "python -m flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt || exit 0"
+                    //bat "black app.py train.py"
                 }
             }
         }
