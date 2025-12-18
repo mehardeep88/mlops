@@ -41,7 +41,7 @@ pipeline {
                 // Pytest code
                 script {
                     echo 'Testing Python Code...'
-                    bat "pytest tests/"
+                    sh "pytest tests/"
                 }
             }
         }
