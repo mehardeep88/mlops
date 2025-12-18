@@ -51,7 +51,7 @@ pipeline {
                     echo 'Starting Trivy file system scan...'
                     //bat 'trivy -v'
                     //sh 'trivy fs --exit-code 0 --skip-dirs .venv --skip-files pylint-report.txt,flake8-report.txt,black-report.txt .'
-                    sh 'trivy fs --format table -o trivy-fs-report.html'
+                    sh 'trivy fs ./ --format table -o trivy-fs-report.html'
                 }
             }
         }
