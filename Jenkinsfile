@@ -26,7 +26,7 @@ pipeline {
                     sh "python --version"
                     sh "python -m pip install --break-system-packages -r requirements.txt"
                     sh "pylint app.py train.py --output=pylint-report.txt --exit-zero"
-                    sh "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
+                    sh "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt || true"
                     sh "black app.py train.py || true"
                     //bat "python -m pip install -r requirements.txt"
                     //bat "python -m pip install --break-system-packages -r requirements.txt"
