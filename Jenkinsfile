@@ -92,11 +92,8 @@ pipeline {
                     docker.withRegistry('${DOCKERHUB_REGISTRY}','${DOCKERHUB_CRED_ID}'){
                         dockerImage.push('latest')
                     }
+                }
             }
         }
-            }
         }
-        
-        }
-    
-}
+} 
