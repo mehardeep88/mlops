@@ -96,7 +96,7 @@ pipeline {
             }
         }
         stage('Deploy'){
-            steps{
+            steps {
                 //deploy to aws
                 script {
                     echo 'Deploying to production...'
@@ -104,5 +104,5 @@ pipeline {
                 }
             }
         }
-        }
+    }
 } 
