@@ -49,8 +49,9 @@ pipeline {
             steps {
                 script {
                     echo 'Starting Trivy file system scan...'
-                    bat 'trivy -v' // confirm Trivy is available
-                    bat 'trivy fs --exit-code 0 --skip-dirs .venv --skip-files pylint-report.txt,flake8-report.txt,black-report.txt .'
+                    //bat 'trivy -v'
+                    //sh 'trivy fs --exit-code 0 --skip-dirs .venv --skip-files pylint-report.txt,flake8-report.txt,black-report.txt .'
+                    sh 'trivy fs --format table -o trivy-fs-report.html'
                 }
             }
         }
